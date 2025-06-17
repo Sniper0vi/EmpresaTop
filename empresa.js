@@ -1,15 +1,29 @@
-
-
+const fs = require("fs");
 const promptSync = require("prompt-sync")();
-
+const path = require("path");
 
 let nome;
 let endereço;
 let distancia;
-let entrega = {Urgente, Normal, urgente, normal};
+let entrega = ["urgente", "Urgente", "normal", "Normal"]
+
 let nomeArquivo = "Informaçoes-do-Cliente.txt";
 
 do{
-    console.log("repita")
     nome = promptSync("Qual o seu nome: ")
-}while (isNaN(nome))
+    if(!isNaN(nome)){
+        console.log("Seu nome é um numero? REPITA!!!") 
+    }
+
+    endereço = promptSync("Qual o numero da sua casa: ")
+    if(isNaN(endereço)){
+        console.log("Voce mora em um livro? REPITA!!!") 
+    }
+
+    distancia = promptSync("Qual a distancia da sua casa em Km: ")
+    if(isNaN(distancia)){
+        console.log("O seu portugues esta muito distante de voce. REPITA!!!") 
+    }
+    
+
+}while (!isNaN(nome) || isNaN(endereço) || isNaN(distancia))
