@@ -5,13 +5,13 @@ const path = require("path");
 let nome;
 let endereço;
 let distancia;
-let entrega;
 let urgente;
 let valorTotal;
 
 let nomeArquivo = "Informaçoes-do-Cliente.txt";
 
 do {
+    console.log("Se voce colocar alguma coisa indevida o questionario sera RESETADO!")
     nome = promptSync("Qual o seu nome: ")
     if (!isNaN(nome)) {
         console.log("Seu nome é um numero? REPITA!!!");
@@ -26,7 +26,7 @@ do {
     if (isNaN(distancia)) {
         console.log("O seu portugues esta muito distante de voce. REPITA!!!");
     }
-    urgente = promptSync("A sua compra é urgente? ")
+    urgente = promptSync("A sua compra é urgente? Sim/Nao ")
     if (!isNaN(urgente)) {
         console.log("Sim ou nao, se decide")
     }
@@ -37,7 +37,8 @@ do {
 
 
 
-if ((urgente == "sim")) {
+if ((urgente == "SIM" || "sim" || "Sim")) {
+    urgente = urgente.toUpperCase()
     valorTotal = (distancia * 1.5) * 1.2
     // colocar aqui para mandar para o documento.txt
 } else {
