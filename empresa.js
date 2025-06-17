@@ -66,8 +66,8 @@ for (let i = 0; i < quantidade; i++) {
 }
 
     let cont = ""; 
-    for (let i = 0; i < nomes.length; i++) {
-        cont += ` Cliente: ${nomes[i]}\t Endereço: ${endereços[i]}\t Distancia em Km: ${distanciaCasas[i]}\t Valor frete${valorTotal[i]}\n`
+    for (i = 0; i < nomes.length; i++) {
+        cont += ` Cliente: ${nomes[i]}\t Endereço: ${endereços[i]}\t Distancia em Km: ${distanciaCasas[i]}\t Valor frete: ${valoresTotais[i]}\n`
     }
     fs.writeFileSync("dadosCliente.txt", cont, "utf-8");
 
