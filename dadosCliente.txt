@@ -1,0 +1,2 @@
+Cliente: digimon	Endereço: rast	Distancia: 203Km	Valor frete: R$365.40
+Cliente: cleber	Endereço: ewos	Distancia: 234Km	Valor frete: R$351.00

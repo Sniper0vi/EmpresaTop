@@ -6,32 +6,17 @@ let nomes = [];
 let endereços = [];
 let distanciaCasas = [];
 let valoresTotais = [];
-let nome;
-let endereço;
-let distancia;
-let urgente;
-let valorTotal;
-let quantidade;
+let i = 0;
 
 do {
-    quantidade = promptSync("Quantas pessoas vão calcular o envio?: ");
-
-    if (isNaN(quantidade) || quantidade <= 0) {
-        console.log("Valor inválido! Digite um número maior que zero.");
-    }
-
-} while (isNaN(quantidade) || quantidade <= 0);
-
-for (let i = 0; i < quantidade; i++) {
-
     do {
-        nome = promptSync("Qual o seu nome: ")
+        nome = promptSync("Qual o seu nome: ");
         if (!isNaN(nome)) {
             console.log("Seu nome é um numero? REPITA!!!");
         }
 
-        endereço = promptSync("Qual o numero da sua casa: ");
-        if (isNaN(endereço)) {
+        endereço = promptSync("Qual o seu endereço: ");
+        if (!isNaN(endereço)) {
             console.log("Voce mora em um livro? REPITA!!!");
         }
 
@@ -39,39 +24,36 @@ for (let i = 0; i < quantidade; i++) {
         if (isNaN(distancia)) {
             console.log("O seu portugues esta muito distante de voce. REPITA!!!");
         }
-        urgente = promptSync("A sua compra é urgente? ")
+
+        urgente = promptSync("A sua compra é urgente? ");
         if (!isNaN(urgente)) {
-            console.log("Sim ou nao, se decide")
+            console.log("Sim ou nao, se decide");
         }
 
-        let i;
+    } while (!isNaN(nome) || !isNaN(endereço) || isNaN(distancia) || !isNaN(urgente))
 
-        nomes[i] = nome
-        endereços[i] = endereço
-        distanciaCasas[i] = distancia
-        console.log(nomes[i], nome);
+    nomes[i] = nome;
+    endereços[i] = endereço;
+    distanciaCasas[i] = parseFloat(distancia);
 
-    } while (!isNaN(nome) || isNaN(endereço) || isNaN(distancia) || !isNaN(urgente))
-
-
-
-    if ((urgente == "SIM" || "sim" || "Sim")) {
-        urgente = urgente.toUpperCase()
-        valorTotal = (distancia * 1.5) * 1.2
-        // colocar aqui para mandar para o documento.txt
+    if (urgente === "SIM" || urgente === "sim" || urgente === "Sim") {
+        valoresTotais[i] = (distanciaCasas[i] * 1.5) * 1.2;
     } else {
-        valorTotal = (distancia * 1.5)
-        // colocar aqui para mandar para o documento.txt
+        valoresTotais[i] = distanciaCasas[i] * 1.5;
     }
+
+    i++;
+
+    parar = promptSync("Deseja continuar continuar? (s/n) ");
+    parar = parar.toLowerCase();
+} while (parar === "s");
+
+let cont = "";
+for (let j = 0; j < nomes.length; j++) {
+    cont += `Cliente: ${nomes[j]}\tEndereço: ${endereços[j]}\tDistancia: ${distanciaCasas[j]}Km\tValor frete: R$${valoresTotais[j].toFixed(2)}\n`;
 }
 
-    let cont = ""; 
-    for (i = 0; i < nomes.length; i++) {
-        cont += ` Cliente: ${nomes[i]}\t Endereço: ${endereços[i]}\t Distancia em Km: ${distanciaCasas[i]}\t Valor frete: ${valoresTotais[i]}\n`
-    }
-    fs.writeFileSync("dadosCliente.txt", cont, "utf-8");
+fs.appendFileSync("dadosCliente.txt", cont, "utf-8");
 
-    console.log("\nConteudo do arquivo:");
-    let conteudo = fs.readFileSync("dadosCliente.txt", "utf-8");
-    console.log(conteudo);
-
+console.log("\nConteudo do arquivo:");
+console.log(fs.readFileSync("dadosCliente.txt", "utf-8"));
